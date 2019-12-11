@@ -47,12 +47,12 @@ function toArabic(romanNumber) {
     return arabicNumber;
 }
 
-console.log(toArabic("X"));
-console.log(toArabic("XII"));
-console.log(toArabic("XVI"));
-console.log(toArabic("XIV"));
-console.log(toArabic("IX"));
-console.log(toArabic("VX"));
-console.log(toArabic("IC"));
-console.log(toArabic("XIIII"));
-console.log(toArabic("IIX"));
+console.log(toArabic("X")); // 10
+console.log(toArabic("XII")); // 12
+console.log(toArabic("XVI")); // 16
+console.log(toArabic("XIV")); // 14
+console.log(toArabic("IX")); // 9
+console.log(toArabic("VX")); // error, V restando
+console.log(toArabic("IC")); // error, I mas de 2 posiciones a la izquierda
+console.log(toArabic("XIIII")); // error, 4 I seguidos
+console.log(toArabic("IIX")); // error, 2 I intentando restar
