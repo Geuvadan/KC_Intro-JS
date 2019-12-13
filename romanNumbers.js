@@ -93,8 +93,16 @@ const arabicToRoman = (arabicNumber) => {
 };
 
 
+console.log(arabicToRoman(9));
+console.log(arabicToRoman(14));
+console.log(arabicToRoman(149));
 console.log(arabicToRoman(1324));
+console.log(arabicToRoman(3999));
+console.log(romanToArabic('IX'));
+console.log(romanToArabic('XIV'));
+console.log(romanToArabic('CXLIX'));
 console.log(romanToArabic('MCCCXXIV'));
+console.log(romanToArabic('MMMCMXCIX'));
 
 // VALIDATOR TESTS
 // console.log(romanNumberValidator("X")); // 10
@@ -120,7 +128,7 @@ console.log(romanToArabic('MCCCXXIV'));
 // console.log(romanToArabic("IIX")); // error, 2 I intentando restar
 // console.log(romanToArabic("MCMXCII")); // 1992
 
-// ROMAN TO ARABIC TESTS
+// ARABIC TO ROMAN TESTS
 // console.log(arabicToRoman(10)); // X
 // console.log(arabicToRoman(12)); // XII
 // console.log(arabicToRoman(16)); // XVI
