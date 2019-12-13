@@ -1,43 +1,42 @@
 const values = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
 const values5 = { V: 5, L: 50, D: 500 };
 const symbols = ["I", "V", "X", "L", "C", "D", "M"];
-const symbols5 = ["V", "L", "D"];
 
 function romanNumberValidator(romanNumber) {
     let counter = 1;
     let lastSymbol = "";
 
     for (const symbol of romanNumber) {
-        if (symbols.indexOf(symbol) !== -1) {
+        if (symbol in values) {
 
             if (lastSymbol !== "") {
-                if (symbols.indexOf(lastSymbol) > symbols.indexOf(symbol)) {
+                if (values[lastSymbol] > values[symbol]) {
                     counter = 1;
 
-                } else if (symbols.indexOf(lastSymbol) === symbols.indexOf(symbol)) {
+                } else if (values[lastSymbol] === values[symbol]) {
                     counter += 1;
-                    if (symbol in symbols5) {
-                        //console.log(`ERROR: dos símbolos ${symbol} no pueden estar contiguos`);
+                    if (symbol in values5) {
+                        // console.log(`Dos símbolos ${symbol} no pueden estar contiguos`);
                         return false;
                     }
                     if (counter > 3) {
-                        //console.log(`ERROR: ${symbol} aparece más de 3 veces seguidas`);
+                        // console.log(`${symbol} aparece más de 3 veces seguidas`);
                         return false;
                     }
 
-                } else if (symbols.indexOf(lastSymbol) < symbols.indexOf(symbol)) {
+                } else if (values[lastSymbol] < values[symbol]) {
                     if (counter > 1) {
-                        //console.log(`ERROR: el símbolo ${lastSymbol} no puede restar dos veces`);
+                        // console.log(`El símbolo ${lastSymbol} no puede restar dos veces`);
                         return false;
-                    } else if (symbols5.indexOf(lastSymbol) !== -1) {
-                        //console.log(`ERROR: el símbolo ${lastSymbol} no puede restar`);
+                    } else if (lastSymbol in values5) {
+                        // console.log(`El símbolo ${lastSymbol} no puede restar`);
                         return false;
                     }
 
                     const position =
                         symbols.indexOf(symbol) - symbols.indexOf(lastSymbol);
                     if (position > 2) {
-                        //console.log(`ERROR: ${lastSymbol} está a más de 2 posiciones de distancia`);
+                        // console.log(`${lastSymbol} está a más de 2 posiciones de distancia`);
                         return false;
                     }
 
@@ -45,13 +44,13 @@ function romanNumberValidator(romanNumber) {
                 }
             }
         } else {
-            //console.log(`ERROR: ${symbol} no corresponde a un número romano`);
+            // console.log(`${symbol} no corresponde a un símbolo romano`);
             return false;
         }
         lastSymbol = symbol;
     }
 
-    //console.log(`${romanNumber} es un número romano válido`);
+    // console.log(`${romanNumber} es un número romano válido`);
     return true;
 }
 
@@ -74,12 +73,14 @@ function romanToArabic(romanNumber) {
         }
 
     } else {
-        return `ERROR: ${romanNumber} no corresponde a un número romano`;
+        return `ERROR: ${romanNumber} no es un número romano válido`;
     }
 
-    return romanNumber + ' - ' + arabicNumber;
+    return romanNumber + ' --> ' + arabicNumber;
 }
 
+
+// VALIDATOR TESTS
 // console.log(romanNumberValidator("X")); // 10
 // console.log(romanNumberValidator("XII")); // 12
 // console.log(romanNumberValidator("XVI")); // 16
@@ -91,7 +92,7 @@ function romanToArabic(romanNumber) {
 // console.log(romanNumberValidator("IIX")); // error, 2 I intentando restar
 // console.log(romanNumberValidator("MCMXCII"));
 
-
+// ROMAN TO ARABIC TESTS
 console.log(romanToArabic("X")); // 10
 console.log(romanToArabic("XII")); // 12
 console.log(romanToArabic("XVI")); // 16
