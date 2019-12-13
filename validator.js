@@ -25,7 +25,8 @@ function romanNumberValidator(romanNumber) {
 
                 } else if (symbols.indexOf(lastSymbol) < symbols.indexOf(symbol)) {
                     if (counter > 1) {
-                        return `ERROR: el símbolo ${lastSymbol} no puede restar dos veces`;
+                        console.log(`ERROR: el símbolo ${lastSymbol} no puede restar dos veces`);
+                        return false;
                     } else if (symbols5.indexOf(lastSymbol) !== -1) {
                         console.log(`ERROR: el símbolo ${lastSymbol} no puede restar`);
                         return false;
