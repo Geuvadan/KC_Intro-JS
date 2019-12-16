@@ -3,11 +3,11 @@ const cardValues = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 
 
 // let cards = [];
 
-const buildDeck = () => {
+const buildDeck = (difSuits, values) => {
     let deck = [];
-    for (let i = 0; i < suits.length; i++) {
-        for (let j = 0; j < cardValues.length; j++) {
-            deck.push(cardValues[j] + suits[i]);
+    for (let i = 0; i < difSuits.length; i++) {
+        for (let j = 0; j < values.length; j++) {
+            deck.push(values[j] + difSuits[i]);
         }
     }
     return deck;
@@ -28,5 +28,5 @@ const shuffle = (deck) => {
 };
 
 // console.log(buildDeck());
-console.log(shuffle(buildDeck()));
-console.log(shuffle(buildDeck().length));
+console.log(shuffle(buildDeck(suits, cardValues)));
+console.log(shuffle(buildDeck(suits, cardValues).length));
