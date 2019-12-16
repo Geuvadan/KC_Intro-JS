@@ -34,10 +34,19 @@ let deal = (deck, player1, player2) => {
         player1.push(deck.shift());
         player2.push(deck.shift());
     }
-
     //return [player1, player2];
 };
 
+
+
 deal(shuffle(buildDeck(suits, cardValues)), player1, player2);
+console.log(player1);
+console.log(player2);
+
+console.log('-----***-----');
+
+player1.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
+player2.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
+
 console.log(player1);
 console.log(player2);
