@@ -1,6 +1,7 @@
 const suits = ['S', 'H', 'C', 'D'];
 const cardValues = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
-
+let player1 = [];
+let player2 = [];
 // let cards = [];
 
 const buildDeck = (difSuits, values) => {
@@ -27,6 +28,16 @@ const shuffle = (deck) => {
 
 };
 
-// console.log(buildDeck());
-console.log(shuffle(buildDeck(suits, cardValues)));
-console.log(shuffle(buildDeck(suits, cardValues).length));
+let deal = (deck, player1, player2) => {
+
+    for (let i = 0; i < 5; i++) {
+        player1.push(deck.shift());
+        player2.push(deck.shift());
+    }
+
+    //return [player1, player2];
+};
+
+deal(shuffle(buildDeck(suits, cardValues)), player1, player2);
+console.log(player1);
+console.log(player2);
