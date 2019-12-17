@@ -1,7 +1,7 @@
 const suits = ['S', 'H', 'C', 'D'];
 const cardValues = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
-let player1 = [];
-let player2 = [];
+let p1Hand = [];
+let p2Hand = [];
 // let cards = [];
 
 const buildDeck = (difSuits, values) => {
@@ -28,25 +28,25 @@ const shuffle = (deck) => {
 
 };
 
-let deal = (deck, player1, player2) => {
+let deal = (deck, hand1, hand2) => {
 
     for (let i = 0; i < 5; i++) {
-        player1.push(deck.shift());
-        player2.push(deck.shift());
+        hand1.push(deck.shift());
+        hand2.push(deck.shift());
     }
     //return [player1, player2];
 };
 
 
 
-deal(shuffle(buildDeck(suits, cardValues)), player1, player2);
-console.log(player1);
-console.log(player2);
+deal(shuffle(buildDeck(suits, cardValues)), p1Hand, p2Hand);
+console.log(p1Hand);
+console.log(p2Hand);
 
 console.log('-----***-----');
 
-player1.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
-player2.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
+p1Hand.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
+p2Hand.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
 
-console.log(player1);
-console.log(player2);
+console.log(p1Hand);
+console.log(p2Hand);
