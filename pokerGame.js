@@ -34,19 +34,44 @@ let deal = (deck, hand1, hand2) => {
         hand1.push(deck.shift());
         hand2.push(deck.shift());
     }
-    //return [player1, player2];
+    hand1.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
+    hand2.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
 };
 
 
+let game = (hand) => {
+    hand.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
+    let counterA = 1;
+    let counterB = 1;
+    let temp = "";
+
+
+    for (i = 1; i <= 4; i++) {
+        if ((hand[i][0] === hand[i - 1][0]) && (counterA === 1)) {
+            temp = hand[i][0];
+            counterA++;
+        } else if ((hand[i][0] === hand[i - 1][0]) && (hand[i][0] === temp)) {
+            counterA++;
+        } else if ((hand[i][0] === hand[i - 1][0]) && (hand[i][0] !== temp)) {
+            counterB++;
+        }
+    }
+
+    // if ((counteA === 1) && counterB === 1) {
+    //     if (cardValues.indexOf(hand[0][0] + 4) === cardValues.indexOf(hand[4][0])) {
+    //         // escalera
+    //     }
+    // }
+
+    console.log(`${counterA} - ${counterB}`);
+};
 
 deal(shuffle(buildDeck(suits, cardValues)), p1Hand, p2Hand);
-console.log(p1Hand);
-console.log(p2Hand);
-
-console.log('-----***-----');
-
-p1Hand.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
-p2Hand.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
 
 console.log(p1Hand);
+game(p1Hand);
+
+console.log('---------------***---------------');
+
 console.log(p2Hand);
+game(p2Hand);
