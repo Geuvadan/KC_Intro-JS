@@ -39,22 +39,33 @@ let deal = (deck, hand1, hand2) => {
     hand2.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
 };
 
-
-let game = (hand) => {
-    hand.sort((a, b) => cardValues.indexOf(a[0]) - cardValues.indexOf(b[0]));
-    let counterA = 1;
-    let counterB = 1;
-    let tempCardValue = "";
+let isFlush = (hand) => {
     let tempCardsSuits = 0;
     let isColor = false;
 
-    // check if it's color
     for (i = 0; i < 5; i++) {
-        if (hand[i][1] === hand[0][1]) {
-            tempCardsSuits++;
-        }
+        if (hand[i][1] === hand[0][1]) tempCardsSuits++;
     }
-    if (tempCardsSuits === 5) isColor = true;
+    if (tempCardsSuits === 5) return true;
+    else return false;
+};
+
+let isStraight = (hand) => {
+    if (!sameOfKind(hand)) {
+        if ((cardValues.indexOf(hand[0][0]) + 4) === cardValues.indexOf(hand[4][0])) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+};
+
+let sameOfKind = (hand) => {
+    let counterA = 1;
+    let counterB = 1;
+    let tempCardValue = "";
 
     // check for cards of the same kind
     for (i = 1; i <= 4; i++) {
@@ -69,28 +80,38 @@ let game = (hand) => {
     }
 
     if ((counterA === 1) && counterB === 1) {
-        if ((cardValues.indexOf(hand[0][0]) + 4) === cardValues.indexOf(hand[4][0])) {
-            if (isColor) {
-                return "Escalera de color";
-            } else {
-                return "Escalera";
-            }
-        } else if (isColor) {
-            return "Color";
-        } else {
-            return "nada";
-        }
+        return false;
+    } else if ((counterA === 2) && counterB === 1) {
+        return "Pair";
+    } else if ((counterA === 3) && counterB === 1) {
+        return "Three of a Kind";
+    } else if ((counterA === 4) && counterB === 1) {
+        return "Poker";
+    } else if ((counterA === 1) && counterB === 2) {
+        return "Pair";
+    } else if ((counterA === 1) && counterB === 3) {
+        return "Three of a Kind";
+    } else if ((counterA === 1) && counterB === 4) {
+        return "Poker";
+    } else if ((counterA === 2) && counterB === 2) {
+        return "Two Pairs";
+    } else if ((counterA === 3) && counterB === 2) {
+        return "Full House";
+    } else if ((counterA === 2) && counterB === 3) {
+        return "Full House";
     }
-
-    console.log(`${counterA} - ${counterB}`);
 };
 
 deal(shuffle(buildDeck(suits, cardValues)), p1Hand, p2Hand);
 
 console.log(p1Hand);
-console.log(game(p1Hand));
+console.log('Same: ' + sameOfKind(p1Hand));
+console.log('Is Color: ' + isFlush(p1Hand));
+console.log('Is Straight: ' + isStraight(p1Hand));
 
 console.log('---------------***---------------');
 
 console.log(p2Hand);
-console.log(game(p2Hand));
+console.log('Same: ' + sameOfKind(p2Hand));
+console.log('Is Color: ' + isFlush(p2Hand));
+console.log('Is Straight: ' + isStraight(p2Hand));
