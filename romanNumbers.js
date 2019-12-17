@@ -1,8 +1,7 @@
 const values = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
 const values5 = { V: 5, L: 50, D: 500 };
 
-
-const romanNumberValidator = (romanNumber) => {
+const romanNumberValidator = romanNumber => {
     const symbols = ["I", "V", "X", "L", "C", "D", "M"];
     let counter = 1;
     let lastSymbol = "";
@@ -15,42 +14,41 @@ const romanNumberValidator = (romanNumber) => {
                 } else if (values[lastSymbol] === values[symbol]) {
                     counter += 1;
                     if (symbol in values5) {
-                        // console.log(`Dos símbolos ${symbol} no pueden estar contiguos`);
+                        // console.log(`2 symbols ${symbol} can't be together`);
                         return false;
                     }
                     if (counter > 3) {
-                        // console.log(`${symbol} aparece más de 3 veces seguidas`);
+                        // console.log(`${symbol} can't be 3 times together`);
                         return false;
                     }
                 } else if (values[lastSymbol] < values[symbol]) {
                     if (counter > 1) {
-                        // console.log(`El símbolo ${lastSymbol} no puede restar dos veces`);
+                        // console.log(`The symbol ${lastSymbol} can't substract 2 times`);
                         return false;
                     } else if (lastSymbol in values5) {
-                        // console.log(`El símbolo ${lastSymbol} no puede restar`);
+                        // console.log(`The symbol ${lastSymbol} can't substract`);
                         return false;
                     }
                     const position =
                         symbols.indexOf(symbol) - symbols.indexOf(lastSymbol);
                     if (position > 2) {
-                        // console.log(`${lastSymbol} está a más de 2 posiciones de distancia`);
+                        // console.log(`${lastSymbol} is further than 2 positions`);
                         return false;
                     }
                     counter = 1;
                 }
             }
         } else {
-            // console.log(`${symbol} no corresponde a un símbolo romano`);
+            // console.log(`${symbol} is not a roman symbol`);
             return false;
         }
         lastSymbol = symbol;
     }
-    // console.log(`${romanNumber} es un número romano válido`);
+    // console.log(`${romanNumber} is not a valid roman number`);
     return true;
 };
 
-
-const romanToArabic = (romanNumber) => {
+const romanToArabic = romanNumber => {
     let arabicNumber = 0;
     let lastSymbol = "";
 
@@ -65,44 +63,78 @@ const romanToArabic = (romanNumber) => {
             lastSymbol = symbol;
         }
     } else {
-        return `ERROR: ${romanNumber} no es un número romano válido`;
+        return `ERROR: ${romanNumber} is not a valid roman number`;
     }
-    return romanNumber + ' --> ' + arabicNumber;
+    return romanNumber + " --> " + arabicNumber;
 };
 
-
-const arabicToRoman = (arabicNumber) => {
-    const units = { 0: '', 1: 'I', 2: 'II', 3: 'III', 4: 'IV', 5: 'V', 6: 'VI', 7: 'VII', 8: 'VIII', 9: 'IX' };
-    const tens = { 0: '', 1: 'X', 2: 'XX', 3: 'XXX', 4: 'XL', 5: 'L', 6: 'LX', 7: 'LXX', 8: 'LXXX', 9: 'XC' };
-    const hundreds = { 0: '', 1: 'C', 2: 'CC', 3: 'CCC', 4: 'CD', 5: 'D', 6: 'DC', 7: 'DCC', 8: 'DCCC', 9: 'CM' };
-    const thousands = { 0: '', 1: 'M', 2: 'MM', 3: 'MMM' };
+const arabicToRoman = arabicNumber => {
+    const units = {
+        0: "",
+        1: "I",
+        2: "II",
+        3: "III",
+        4: "IV",
+        5: "V",
+        6: "VI",
+        7: "VII",
+        8: "VIII",
+        9: "IX"
+    };
+    const tens = {
+        0: "",
+        1: "X",
+        2: "XX",
+        3: "XXX",
+        4: "XL",
+        5: "L",
+        6: "LX",
+        7: "LXX",
+        8: "LXXX",
+        9: "XC"
+    };
+    const hundreds = {
+        0: "",
+        1: "C",
+        2: "CC",
+        3: "CCC",
+        4: "CD",
+        5: "D",
+        6: "DC",
+        7: "DCC",
+        8: "DCCC",
+        9: "CM"
+    };
+    const thousands = { 0: "", 1: "M", 2: "MM", 3: "MMM" };
 
     const position = { 0: units, 1: tens, 2: hundreds, 3: thousands };
 
     let romanNumber = "";
-    let arabicArray = arabicNumber.toString().split('').reverse();
+    let arabicArray = arabicNumber
+        .toString()
+        .split("")
+        .reverse();
 
-    if ((arabicNumber > 0) && (arabicNumber < 4000)) {
+    if (arabicNumber > 0 && arabicNumber < 4000) {
         for (let i = arabicArray.length - 1; i >= 0; i--) {
             romanNumber += position[i][arabicArray[i]];
         }
-        return arabicNumber + ' --> ' + romanNumber;
+        return arabicNumber + " --> " + romanNumber;
     } else {
-        return `'${arabicNumber}' no puede expresarse como número romano`;
+        return `'${arabicNumber}' cannot be whitten as a roman number`;
     }
 };
-
 
 console.log(arabicToRoman(9));
 console.log(arabicToRoman(14));
 console.log(arabicToRoman(149));
 console.log(arabicToRoman(1324));
 console.log(arabicToRoman(3999));
-console.log(romanToArabic('IX'));
-console.log(romanToArabic('XIV'));
-console.log(romanToArabic('CXLIX'));
-console.log(romanToArabic('MCCCXXIV'));
-console.log(romanToArabic('MMMCMXCIX'));
+console.log(romanToArabic("IX"));
+console.log(romanToArabic("XIV"));
+console.log(romanToArabic("CXLIX"));
+console.log(romanToArabic("MCCCXXIV"));
+console.log(romanToArabic("MMMCMXCIX"));
 
 // VALIDATOR TESTS
 // console.log(romanNumberValidator("X")); // 10
@@ -134,8 +166,8 @@ console.log(romanToArabic('MMMCMXCIX'));
 // console.log(arabicToRoman(16)); // XVI
 // console.log(arabicToRoman(14)); // XIV
 // console.log(arabicToRoman(9)); // IX
-// console.log(arabicToRoman("4000")); // error, 
-// console.log(arabicToRoman("0")); // error, 
+// console.log(arabicToRoman("4000")); // error,
+// console.log(arabicToRoman("0")); // error,
 // console.log(arabicToRoman("hola")); // error,
 // console.log(arabicToRoman("4 5")); // error,
 // console.log(arabicToRoman(1992)); // MCMXCII
