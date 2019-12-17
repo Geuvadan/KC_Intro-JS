@@ -134,8 +134,15 @@ let sameOfKind = hand => {
     }
 };
 
+let assignGame = hand => {};
+
+let whoWin = (game1, gamw2) => {};
+
+/////////////////  GAME START  /////////////////////
+
 let deck = buildDeck(suits, cardValues);
-deal(shuffle(deck), p1Hand, p2Hand);
+deck = shuffle(deck);
+deal(deck, p1Hand, p2Hand);
 
 console.log(p1Hand);
 console.log("Same: " + sameOfKind(p1Hand));
