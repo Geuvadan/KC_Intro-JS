@@ -1,5 +1,3 @@
-// hola
-
 const suits = ["S", "H", "C", "D"];
 const cardValues = [
     "2",
@@ -218,7 +216,7 @@ console.log(whoWin(p1Game, p2Game));
 
 ////////////////  MANUAL TESTS  //////////////////
 
-console.log(["3D", "4D", "9D", "TD", "KD"]);
+/* console.log(["3D", "4D", "9D", "TD", "KD"]);
 console.log(assignGame(["3D", "4D", "9D", "TD", "KD"]));
 console.log("Same: " + sameOfKind(["3D", "4D", "9D", "TD", "KD"]));
 console.log("Is Color: " + isFlush(["3D", "4D", "9D", "TD", "KD"]));
@@ -230,4 +228,4 @@ console.log(assignGame(["4D", "5D", "6D", "7D", "8D"]));
 console.log("Same: " + sameOfKind(p2Hand));
 console.log("Is Color: " + isFlush(["4D", "5D", "6D", "7D", "8D"]));
 console.log("Is Straight: " + isStraight(["4D", "5D", "6D", "7D", "8D"]));
-console.log("---------------***---------------");
+console.log("---------------***---------------"); */
