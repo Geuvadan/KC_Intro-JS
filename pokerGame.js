@@ -28,7 +28,7 @@ const gamesValue = [
 let p1Hand = [];
 let p2Hand = [];
 let p1Game = [];
-let p2Game = { game: "none", biggest: "0" };
+let p2Game = [];
 
 const buildDeck = (difSuits, values) => {
     let deck = [];
@@ -40,9 +40,9 @@ const buildDeck = (difSuits, values) => {
     return deck;
 };
 
-// Shuffle using Durstenfeld shuffle algorithm.
 const shuffle = deck => {
     let shuffledDeck = deck;
+    // Shuffle using Durstenfeld shuffle algorithm.
     for (let i = shuffledDeck.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         var temp = deck[i];
@@ -163,11 +163,27 @@ let assignGame = (hand) => {
     } else if (isFlush(hand)) {
         return ["Flush", cardValues[Math.max(...handValues)]];
     } else {
-        return ["none", cardValues[Math.max(...handValues)]];
+        return ["High Card", cardValues[Math.max(...handValues)]];
     }
 };
 
-let whoWin = (game1, gamw2) => {};
+let whoWin = (game1, game2) => {
+    if ((gamesValue.indexOf(game1[0])) > (gamesValue.indexOf(game2[0]))) {
+        return `Player 1 wins! ${game1[0]}`;
+    } else if ((gamesValue.indexOf(game1[0])) < (gamesValue.indexOf(game2[0]))) {
+        return `Player 2 wins! ${game2[0]}`;
+    } else if (((gamesValue.indexOf(game1[0])) === (gamesValue.indexOf(game2[0])))) {
+        if (((cardValues.indexOf(game1[1])) > (cardValues.indexOf(game2[1])))) {
+            return `Player 1 wins! bigger ${game1[0]}`;
+        } else if (((cardValues.indexOf(game1[1])) < (cardValues.indexOf(game2[1])))) {
+            return `Player 2 wins! bigger ${game2[0]}`;
+        } else {
+            return 'Draw';
+        }
+    } else {
+        return 'Something went wrong :(';
+    }
+};
 
 /////////////////  GAME START  /////////////////////
 
@@ -175,35 +191,45 @@ let deck = buildDeck(suits, cardValues);
 deck = shuffle(deck);
 deal(deck, p1Hand, p2Hand);
 
+p1Game = assignGame(p1Hand);
+p2Game = assignGame(p2Hand);
+
 console.log(p1Hand);
-// console.log("Same: " + sameOfKind(p1Hand));
-console.log(assignGame(p1Hand));
-console.log("Is Color: " + isFlush(p1Hand));
-console.log("Is Straight: " + isStraight(p1Hand));
-console.log("---------------***---------------");
-
-
-console.log("---------------***---------------");
-
 console.log(p2Hand);
-// console.log("Same: " + sameOfKind(p2Hand));
-console.log(assignGame(p2Hand));
-console.log("Is Color: " + isFlush(p2Hand));
-console.log("Is Straight: " + isStraight(p2Hand));
 console.log("---------------***---------------");
-console.log("---------------***---------------");
+console.log(whoWin(p1Game, p2Game));
 
-console.log(['4D', '4D', '9D', '9D', '9D']);
-console.log("Same: " + sameOfKind(['4D', '4D', '9D', '9D', '9D']));
-console.log(assignGame(['4D', '4D', '9D', '9D', '9D']));
-console.log("Is Color: " + isFlush(['4D', '4D', '9D', '9D', '9D']));
-console.log("Is Straight: " + isStraight(['4D', '4D', '9D', '9D', '9D']));
-console.log("---------------***---------------");
-console.log("---------------***---------------");
 
-console.log(['4D', '5D', '6D', '7D', '8D']);
+/////////////  TESTS  //////////////
+
+// console.log(p1Hand);
+// console.log(p1Game);
+// console.log("Is Color: " + isFlush(p1Hand));
+// console.log("Is Straight: " + isStraight(p1Hand));
+// console.log("---------------***---------------");
+
+
+// console.log(p2Hand);
+// console.log(p2Game);
+// console.log("Is Color: " + isFlush(p2Hand));
+// console.log("Is Straight: " + isStraight(p2Hand));
+// console.log("---------------***---------------");
+
+
+
+////////////////  MANUAL TESTS  //////////////////
+
+// console.log(['4D', '4D', '9D', '9D', '9D']);
+// console.log(assignGame(['4D', '4D', '9D', '9D', '9D']));
+// console.log("Same: " + sameOfKind(['4D', '4D', '9D', '9D', '9D']));
+// console.log("Is Color: " + isFlush(['4D', '4D', '9D', '9D', '9D']));
+// console.log("Is Straight: " + isStraight(['4D', '4D', '9D', '9D', '9D']));
+// console.log("---------------***---------------");
+
+
+// console.log(['4D', '5D', '6D', '7D', '8D']);
+// console.log(assignGame(['4D', '5H', '6D', '7D', '8D']));
 // console.log("Same: " + sameOfKind(p2Hand));
-console.log(assignGame(['4D', '5H', '6D', '7D', '8D']));
-console.log("Is Color: " + isFlush(['4D', '5D', '6D', '7D', '8D']));
-console.log("Is Straight: " + isStraight(['4D', '5D', '6D', '7D', '8D']));
-console.log("---------------***---------------");
+// console.log("Is Color: " + isFlush(['4D', '5D', '6D', '7D', '8D']));
+// console.log("Is Straight: " + isStraight(['4D', '5D', '6D', '7D', '8D']));
+// console.log("---------------***---------------");
