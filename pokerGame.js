@@ -1,3 +1,5 @@
+// hola
+
 const suits = ["S", "H", "C", "D"];
 const cardValues = [
     "2",
@@ -112,7 +114,8 @@ let sameOfKind = hand => {
         }
     }
 
-    let biggestCardValue = (tempCardValue >= otherCardValue) ? tempCardValue : otherCardValue;
+    let biggestCardValue =
+        tempCardValue >= otherCardValue ? tempCardValue : otherCardValue;
 
     if (counterA === 1 && counterB === 1) {
         return false;
@@ -137,7 +140,7 @@ let sameOfKind = hand => {
     }
 };
 
-let assignGame = (hand) => {
+let assignGame = hand => {
     let handValues = [];
 
     for (i = 0; i < hand.length; i++) {
@@ -152,7 +155,10 @@ let assignGame = (hand) => {
         }
     } else if (sameOfKind(hand)) {
         if (isFlush(hand)) {
-            if ((gamesValue.indexOf(sameOfKind(hand)[0])) < (gamesValue.indexOf("Flush"))) {
+            if (
+                gamesValue.indexOf(sameOfKind(hand)[0]) <
+                gamesValue.indexOf("Flush")
+            ) {
                 return ["Flush", cardValues[Math.max(...handValues)]];
             } else {
                 return sameOfKind(hand);
@@ -168,20 +174,22 @@ let assignGame = (hand) => {
 };
 
 let whoWin = (game1, game2) => {
-    if ((gamesValue.indexOf(game1[0])) > (gamesValue.indexOf(game2[0]))) {
+    if (gamesValue.indexOf(game1[0]) > gamesValue.indexOf(game2[0])) {
         return `Player 1 wins! ${game1[0]}`;
-    } else if ((gamesValue.indexOf(game1[0])) < (gamesValue.indexOf(game2[0]))) {
+    } else if (gamesValue.indexOf(game1[0]) < gamesValue.indexOf(game2[0])) {
         return `Player 2 wins! ${game2[0]}`;
-    } else if (((gamesValue.indexOf(game1[0])) === (gamesValue.indexOf(game2[0])))) {
-        if (((cardValues.indexOf(game1[1])) > (cardValues.indexOf(game2[1])))) {
+    } else if (gamesValue.indexOf(game1[0]) === gamesValue.indexOf(game2[0])) {
+        if (cardValues.indexOf(game1[1]) > cardValues.indexOf(game2[1])) {
             return `Player 1 wins! bigger ${game1[0]}`;
-        } else if (((cardValues.indexOf(game1[1])) < (cardValues.indexOf(game2[1])))) {
+        } else if (
+            cardValues.indexOf(game1[1]) < cardValues.indexOf(game2[1])
+        ) {
             return `Player 2 wins! bigger ${game2[0]}`;
         } else {
-            return 'Draw';
+            return "Draw";
         }
     } else {
-        return 'Something went wrong :(';
+        return "Something went wrong :(";
     }
 };
 
@@ -199,7 +207,6 @@ console.log(p2Hand);
 console.log("---------------***---------------");
 console.log(whoWin(p1Game, p2Game));
 
-
 /////////////  TESTS  //////////////
 
 // console.log(p1Hand);
@@ -208,14 +215,11 @@ console.log(whoWin(p1Game, p2Game));
 // console.log("Is Straight: " + isStraight(p1Hand));
 // console.log("---------------***---------------");
 
-
 // console.log(p2Hand);
 // console.log(p2Game);
 // console.log("Is Color: " + isFlush(p2Hand));
 // console.log("Is Straight: " + isStraight(p2Hand));
 // console.log("---------------***---------------");
-
-
 
 ////////////////  MANUAL TESTS  //////////////////
 
@@ -225,7 +229,6 @@ console.log(whoWin(p1Game, p2Game));
 // console.log("Is Color: " + isFlush(['4D', '4D', '9D', '9D', '9D']));
 // console.log("Is Straight: " + isStraight(['4D', '4D', '9D', '9D', '9D']));
 // console.log("---------------***---------------");
-
 
 // console.log(['4D', '5D', '6D', '7D', '8D']);
 // console.log(assignGame(['4D', '5H', '6D', '7D', '8D']));
