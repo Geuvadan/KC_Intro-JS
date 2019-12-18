@@ -70,20 +70,15 @@ let isFlush = hand => {
     for (i = 0; i < 5; i++) {
         if (hand[i][1] === hand[0][1]) tempCardsSuits++;
     }
-    if (tempCardsSuits === 5) return true;
-    else return false;
+    return tempCardsSuits === 5;
 };
 
 let isStraight = hand => {
     if (!sameOfKind(hand)) {
-        if (
+        return (
             cardValues.indexOf(hand[0][0]) + 4 ===
             cardValues.indexOf(hand[4][0])
-        ) {
-            return true;
-        } else {
-            return false;
-        }
+        );
     } else {
         return false;
     }
@@ -223,16 +218,16 @@ console.log(whoWin(p1Game, p2Game));
 
 ////////////////  MANUAL TESTS  //////////////////
 
-// console.log(['4D', '4D', '9D', '9D', '9D']);
-// console.log(assignGame(['4D', '4D', '9D', '9D', '9D']));
-// console.log("Same: " + sameOfKind(['4D', '4D', '9D', '9D', '9D']));
-// console.log("Is Color: " + isFlush(['4D', '4D', '9D', '9D', '9D']));
-// console.log("Is Straight: " + isStraight(['4D', '4D', '9D', '9D', '9D']));
-// console.log("---------------***---------------");
+console.log(["3D", "4D", "9D", "TD", "KD"]);
+console.log(assignGame(["3D", "4D", "9D", "TD", "KD"]));
+console.log("Same: " + sameOfKind(["3D", "4D", "9D", "TD", "KD"]));
+console.log("Is Color: " + isFlush(["3D", "4D", "9D", "TD", "KD"]));
+console.log("Is Straight: " + isStraight(["3D", "4D", "9D", "TD", "KD"]));
+console.log("---------------***---------------");
 
-// console.log(['4D', '5D', '6D', '7D', '8D']);
-// console.log(assignGame(['4D', '5H', '6D', '7D', '8D']));
-// console.log("Same: " + sameOfKind(p2Hand));
-// console.log("Is Color: " + isFlush(['4D', '5D', '6D', '7D', '8D']));
-// console.log("Is Straight: " + isStraight(['4D', '5D', '6D', '7D', '8D']));
-// console.log("---------------***---------------");
+console.log(["4D", "5D", "6D", "7D", "8D"]);
+console.log(assignGame(["4D", "5D", "6D", "7D", "8D"]));
+console.log("Same: " + sameOfKind(p2Hand));
+console.log("Is Color: " + isFlush(["4D", "5D", "6D", "7D", "8D"]));
+console.log("Is Straight: " + isStraight(["4D", "5D", "6D", "7D", "8D"]));
+console.log("---------------***---------------");
