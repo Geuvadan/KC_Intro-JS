@@ -27,8 +27,8 @@ const gamesValue = [
 ];
 let p1Hand = [];
 let p2Hand = [];
-let p1Game = "";
-let p2Game = "";
+let p1Game = [];
+let p2Game = { game: "none", biggest: "0" };
 
 const buildDeck = (difSuits, values) => {
     let deck = [];
@@ -64,7 +64,6 @@ let deal = (deck, hand1, hand2) => {
 
 let isFlush = hand => {
     let tempCardsSuits = 0;
-    let isColor = false;
 
     for (i = 0; i < 5; i++) {
         if (hand[i][1] === hand[0][1]) tempCardsSuits++;
@@ -92,6 +91,7 @@ let sameOfKind = hand => {
     let counterA = 1;
     let counterB = 1;
     let tempCardValue = "";
+    let otherCardValue = "";
 
     // check for cards of the same kind
     for (i = 1; i <= 4; i++) {
@@ -108,33 +108,64 @@ let sameOfKind = hand => {
             hand[i][0] !== tempCardValue
         ) {
             counterB++;
+            otherCardValue = hand[i][0];
         }
     }
+
+    let biggestCardValue = (tempCardValue >= otherCardValue) ? tempCardValue : otherCardValue;
 
     if (counterA === 1 && counterB === 1) {
         return false;
     } else if (counterA === 2 && counterB === 1) {
-        return "Pair";
+        return ["Pair", biggestCardValue];
     } else if (counterA === 3 && counterB === 1) {
-        return "Three of a Kind";
+        return ["Three of a Kind", biggestCardValue];
     } else if (counterA === 4 && counterB === 1) {
-        return "Four of a Kind";
+        return ["Four of a Kind", biggestCardValue];
     } else if (counterA === 1 && counterB === 2) {
-        return "Pair";
+        return ["Pair", biggestCardValue];
     } else if (counterA === 1 && counterB === 3) {
-        return "Three of a Kind";
+        return ["Three of a Kind", biggestCardValue];
     } else if (counterA === 1 && counterB === 4) {
-        return "Four of a Kind";
+        return ["Four of a Kind", biggestCardValue];
     } else if (counterA === 2 && counterB === 2) {
-        return "Two Pairs";
+        return ["Two Pairs", biggestCardValue];
     } else if (counterA === 3 && counterB === 2) {
-        return "Full House";
+        return ["Full House", biggestCardValue];
     } else if (counterA === 2 && counterB === 3) {
-        return "Full House";
+        return ["Full House", biggestCardValue];
     }
 };
 
-let assignGame = hand => {};
+let assignGame = (hand) => {
+    let handValues = [];
+
+    for (i = 0; i < hand.length; i++) {
+        handValues.push(cardValues.indexOf(hand[i][0]));
+    }
+
+    if (isStraight(hand)) {
+        if (isFlush(hand)) {
+            return ["Straight flush", cardValues[Math.max(...handValues)]];
+        } else {
+            return ["Straight", cardValues[Math.max(...handValues)]];
+        }
+    } else if (sameOfKind(hand)) {
+        if (isFlush(hand)) {
+            if ((gamesValue.indexOf(sameOfKind(hand)[0])) < (gamesValue.indexOf("Flush"))) {
+                return ["Flush", cardValues[Math.max(...handValues)]];
+            } else {
+                return sameOfKind(hand);
+            }
+        } else {
+            return sameOfKind(hand);
+        }
+    } else if (isFlush(hand)) {
+        return ["Flush", cardValues[Math.max(...handValues)]];
+    } else {
+        return ["none", cardValues[Math.max(...handValues)]];
+    }
+};
 
 let whoWin = (game1, gamw2) => {};
 
@@ -145,13 +176,34 @@ deck = shuffle(deck);
 deal(deck, p1Hand, p2Hand);
 
 console.log(p1Hand);
-console.log("Same: " + sameOfKind(p1Hand));
+// console.log("Same: " + sameOfKind(p1Hand));
+console.log(assignGame(p1Hand));
 console.log("Is Color: " + isFlush(p1Hand));
 console.log("Is Straight: " + isStraight(p1Hand));
+console.log("---------------***---------------");
+
 
 console.log("---------------***---------------");
 
 console.log(p2Hand);
-console.log("Same: " + sameOfKind(p2Hand));
+// console.log("Same: " + sameOfKind(p2Hand));
+console.log(assignGame(p2Hand));
 console.log("Is Color: " + isFlush(p2Hand));
 console.log("Is Straight: " + isStraight(p2Hand));
+console.log("---------------***---------------");
+console.log("---------------***---------------");
+
+console.log(['4D', '4D', '9D', '9D', '9D']);
+console.log("Same: " + sameOfKind(['4D', '4D', '9D', '9D', '9D']));
+console.log(assignGame(['4D', '4D', '9D', '9D', '9D']));
+console.log("Is Color: " + isFlush(['4D', '4D', '9D', '9D', '9D']));
+console.log("Is Straight: " + isStraight(['4D', '4D', '9D', '9D', '9D']));
+console.log("---------------***---------------");
+console.log("---------------***---------------");
+
+console.log(['4D', '5D', '6D', '7D', '8D']);
+// console.log("Same: " + sameOfKind(p2Hand));
+console.log(assignGame(['4D', '5H', '6D', '7D', '8D']));
+console.log("Is Color: " + isFlush(['4D', '5D', '6D', '7D', '8D']));
+console.log("Is Straight: " + isStraight(['4D', '5D', '6D', '7D', '8D']));
+console.log("---------------***---------------");
