@@ -108,10 +108,10 @@ Input: **Player 1**: 2H 3D 5S 9C KD **Player 2**: 2C 3H 4S 8C AH
 Output: Player 2 wins, Higher Card
 
 Input: **Player 1**: 2H 4S 4C 2D 4H **Player 2**: 2S 8S AS QS 3S
-Output: Jugador 1 gana, escalera de color
+Output: Player 1 wins, Straight flush
 
 Input: **Player 1**: 2H 3D 5S 9C KD **Player 2**: 2C 3H 4S 8C KH
-Output: Jugador 1 gana, carta más alta
+Output: Player 1 wins, Higher Card
 
 Input: **Player 1**: 2H 3D 5S 9C KD **Player 2**: 2D 3H 5C 9S KH
 Output: Tie
