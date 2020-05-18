@@ -103,7 +103,7 @@ A hand is a group of 5 cards
 * Straight flush 
 
 ### Examples
-
+~~~
 Input: **Player 1**: 2H 3D 5S 9C KD **Player 2**: 2C 3H 4S 8C AH
 Output: Player 2 wins, Higher Card
 
@@ -115,4 +115,5 @@ Output: Jugador 1 gana, carta más alta
 
 Input: **Player 1**: 2H 3D 5S 9C KD **Player 2**: 2D 3H 5C 9S KH
 Output: Tie
+~~~
 
